@@ -1,26 +1,31 @@
-// Include Playwright module
-const { test, expect } = require('@playwright/test');
-
-// Write a test
-test('Validate YouTube title', async ({ page }) => {
-  // Go to URL
-  await page.goto('https://www.youtube.com/');
-
-  // Search with keywords
-  await page.getByPlaceholder('Search').click();
-
-  // Search name
-  await page.getByPlaceholder('Search').fill('hubtel');
-  await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeEnabled();
-  await page.getByRole('button', { name: 'Search', exact: true }).click();
+//Include playwright module
+const{test,expect} = require('@playwright/test');
 
 
-  // Clicking link on YouTube
-  await page.getByRole('link', { name: /Hubtel AI Lab by Hubtel/ }).click();
+// write a test
+test('validate Youtube Title', async({page})=>{
 
-  // Validate title
-  await expect(page).toHaveTitle(/Hubtel AI Lab/);
+  // go to url
+  await page.goto('https://www.youtube.com');
 
-  await page.evaluate(() => alert('Test Completed Successfully!'));
-  
-});
+//search field with keywords
+await page.getByPlaceholder('Search').click();
+//fill the search area
+await page.getByPlaceholder('Search').fill('hubtel');
+
+//expect the element
+await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeEnabled();
+
+//click on search button
+await page.getByRole('button', { name: 'Search', exact: true }).click();
+
+// click on the video
+await page.getByRole('link', { name: 'Hubtel @hubtel503•2.37K' }).click();
+
+// validation 
+await expect(page).toHaveTitle('Hubtel-YouTube');
+
+}
+
+)
+
